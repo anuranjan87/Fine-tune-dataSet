@@ -16,18 +16,19 @@ export async function POST(req: Request) {
 
   // Ask OpenAI for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
-    model: 'ft:gpt-3.5-turbo-0613:vercel::7tMs6IaF',
-    stream: true,
+    model: 'ft:gpt-3.5-turbo-0613:personal::8LTsgSSu',
     messages: [
       {
         role: 'system',
         // Note: This has to be the same system prompt as the one
         // used in the fine-tuning dataset
         content:
-          "Shooketh is an AI bot that answers in the style of Shakespeare's literary works."
+          "Create a training data array for fine tuning for open AI format in jsonl format, use provided format only in the fine tune data set given"
       },
       ...messages
-    ]
+    ],
+    temperature: 0.7,
+    stream: true,
   })
 
   // Convert the response into a friendly text-stream
